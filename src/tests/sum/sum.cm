@@ -1,0 +1,23 @@
+int vet[ 5 ];
+
+int sum (int a[], int n)
+{
+	if (n <= 0)
+		return 0;
+	return sum(a, n - 1) + a[n - 1];
+}
+
+void main(void)
+{
+	int i;
+	int n;
+	n = 5;
+	i = 0;
+	while (i < n){
+		vet[i] = input();
+		i = i + 1;
+	}
+	output(sum(vet, n));
+}
+
+			
