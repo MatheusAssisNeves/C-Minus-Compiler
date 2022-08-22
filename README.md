@@ -23,12 +23,17 @@ make
 .\compiler CminusCode.cm
 ```
 
-## Instructions
+After passing a C-minus file (.cm) the program will generate both an assembly-like instruction file (.asm) and a equivalent binary file (.bin) for the target processor.
+
+Some exemples that can used are inside the '*/tests*' folder.
+## Code Generation
+The code generation was targeted for my own instruction set based on the MIPS architecture that can be seen bellow:
+
+### Instructions
 |    |            |                                  |        | 25     -     21 | 20     -     16 | 15     -     11 | 10     -       0  |
 |----|:----------:|----------------------------------|:------:|:---------------:|:---------------:|:---------------:|:-----------------:|
 |    |            |                                  | 6 bits |      5 bits     |      5 bits     |      5 bits     |      11 bits      |
 |    |**Operations**|                                | **OP** |                 |                 |                 |                   |
-|----|:----------:|----------------------------------|:------:|:---------------:|:---------------:|:---------------:|:-----------------:|
 |  0 |     NOP    | No operation                     | 000000 |        0        |                 |                 |                   |
 |  1 |     ADD    | rd = rs + rt                     | 000001 |        rs       |        rt       |        rd       |         0         |
 |  2 |    ADDi    | rt = rs + im16                   | 000010 |        rs       |        rt       |   Immediate16   |                   |
@@ -57,3 +62,16 @@ make
 | 25 |     IN     | rs = switchs                     | 011001 |        rs       |        0        |        0        |         0         |
 | 26 |     OUT    | display = rs                     | 011010 |        rs       |        0        |        0        |         0         |
 | 27 |     HLT    | Halt                             | 011011 |                                   0                                     |
+
+### Registers
+
+|     **Number**    |      **Name**      |          **Function**            |
+|:-----------------:|:------------------:|:---------------------------------|
+|     R0            |     $zero          |     Always 0                     |
+|     R1            |      $at           |     Auxiliary register           |
+|     R2            |      $v0           |     Function return              |
+|     R3 - R6       |      $a0 - $a3     |     Function arguments           |
+|     R7 - R28      |      $t0 - $t21    |     Temporary registers          |
+|     R29           |      $gp           |     Global Pointer               |
+|     R30           |      $sp           |     Stack Pointer                |
+|     R31           |      $ra           |     Return Address               |
